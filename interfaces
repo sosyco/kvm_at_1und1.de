@@ -1,0 +1,25 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto eth0
+iface eth0 inet dhcp
+iface eth0 inet6 static
+address ....
+netmask 64
+post-up ip -6 route add fe80::1 dev eth0
+post-up ip -6 route add default via fe80::1 dev eth0
+post-down ip -6 route del default via fe80::1 dev eth0
+post-down ip -6 route del fe80::1 dev eth0
+
+# private internal net for IPFIRE-Green and other vms
+auto privatebr0
+iface privatebr0 inet static
+        address 192.168.201.254
+        netmask 255.255.255.0
+        pre-up    brctl addbr privatebr0
+        post-down brctl delbr privatebr0
