@@ -16,6 +16,9 @@ post-up ip -6 route add default via fe80::1 dev eth0
 post-down ip -6 route del default via fe80::1 dev eth0
 post-down ip -6 route del fe80::1 dev eth0
 
+# -----------------------------------------------------------
+# you need this part for your private-network with NO direct 
+# connection to the outside.
 # private internal net for IPFIRE-Green and other vms
 auto privatebr0
 iface privatebr0 inet static
