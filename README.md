@@ -1,24 +1,37 @@
-# kvm / 1und1.de
+# kvm / 1und1.de / RootServer-Systeme
+keine Haftung für Fehler/Schäden durch die Nutzung dieser Dateien.
 
-1und1.de does not allow brigding the external interface (eth0)
+1und1.de erlaubt aus Sicherheitsgründen nicht die Verbindung einer VM via Bridge auf EHT0 mit dem Internet.
+Die hier abgelegten Dateien können helfen die Anbindung via NAT für das 
+folgende Szenario einfach zu ermöglichen:
 
-This Files may help to configure BaseSystem with firewall and clients.
+VM01 
+Name: IPFIRE 
+Quelle: http://www.ipfire.org/download
+Funktion: Der Firewall sichert die Netzwerkverbindung zweischen dem externe Netz (Virtuelle Netzwerk'default':NAT) und dem internen Netz (Bridge privatebr0:Wirtgerät vnet1)
+Konfiguration:
+RED: Virtuelle Netzwerk'default':NAT; DHCP; (192.168.122.2)
+GREEN: Bridge privatebr0:Wirtgerät vnet1; 192.168.201.1; DHCP-Server
 
-VM01: IPFIRE
-- Internal RED-Interface on "...'default':NAT" via DHCP
-- Internal GREEN-Interface on "Bridge privatebr0...vmnet1" with 192.168.201.1
+VM02...VMXX
+System: Beliebig
+Konfiguration:
+ETH0: Bridge privatebr0:Wirtgerät vnet1; DHCP
+Portzuweisung von IPFIRE aus.
 
-VM0X: ????
-- Internal Network on "Bridge privatebr0...vmnet1" via DHCP
-- PORTFORWARDING, Intrusion-Detection from IPFIRE
+------------------------------------------------------------
+BasisSystem: Ubuntu 14.04.X with KVM
+# aptitude install bridge-utils qemu-kvm libvirt-bin haveged
 
-....
+Dateien und Funktion: 
+/etc/libvirt/qemu/networks/default.xml
+- Änderung der Defaultnetzwerkeinstellungen.
+- Nur noch 192.168.122.2 wird zugewiesen
+- Nur noch IPFIRE RED-Schnittstelle mit dem Netz 'default' verbinden
 
-System: Ubuntu 14.04.X with KVM
-- aptitude install bridge-utils qemu-kvm libvirt-bin haveged
+/etc/network/interfaces
+- Anlegen der Schnittstelle privatebr0 ohne direkte Verbindung nach Aussen.
+- Netzwerkschnittstelle für alle anderen VMs
 
-Filespostitions: 
-- /etc/libvirt/qemu/networks/default.xml
-- /etc/network/interfaces
-- /etc/libvirt/hooks/qemu
-
+/etc/libvirt/hooks/qemu
+- Script um alle definierten Portranges via NAT von ETH0 auf 192.168.122.2 umzuleiten.
