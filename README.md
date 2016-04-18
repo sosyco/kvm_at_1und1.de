@@ -23,7 +23,8 @@ Portzuweisung von IPFIRE aus.
 BasisSystem: Ubuntu 14.04.X with KVM
 - aptitude install bridge-utils qemu-kvm libvirt-bin haveged
 
-Dateien und Funktion: 
+Dateien und Funktion:
+
 /etc/libvirt/qemu/networks/default.xml
 - Änderung der Defaultnetzwerkeinstellungen.
 - Nur noch 192.168.122.2 wird zugewiesen
