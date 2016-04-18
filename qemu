@@ -5,7 +5,7 @@
 
 # Update the following variables to fit your setup
 Host_ipaddr=<ipaddr of eth0>
-IPFIRE_name=<name of your IPFIRE-VM>
+IPFIRE_name=IPFIRE
 IPFIRE_ipaddr=192.168.122.2
 IPFIRE_portranges=( '0:21' '23:65500') # typical port 22 to the host, all other to IPFIRE
 #
