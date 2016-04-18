@@ -21,7 +21,7 @@ Portzuweisung von IPFIRE aus.
 
 ------------------------------------------------------------
 BasisSystem: Ubuntu 14.04.X with KVM
-# aptitude install bridge-utils qemu-kvm libvirt-bin haveged
+- aptitude install bridge-utils qemu-kvm libvirt-bin haveged
 
 Dateien und Funktion: 
 /etc/libvirt/qemu/networks/default.xml
