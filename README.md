@@ -5,18 +5,29 @@ keine Haftung für Fehler/Schäden durch die Nutzung dieser Dateien.
 Die hier abgelegten Dateien können helfen die Anbindung via NAT für das 
 folgende Szenario einfach zu ermöglichen:
 
-VM01 
-Name: IPFIRE 
+VM01
+
+Name: IPFIRE
+
 Quelle: http://www.ipfire.org/download
+
 Funktion: Der Firewall sichert die Netzwerkverbindung zweischen dem externe Netz (Virtuelle Netzwerk'default':NAT) und dem internen Netz (Bridge privatebr0:Wirtgerät vnet1)
+
 Konfiguration:
+
 RED: Virtuelle Netzwerk'default':NAT; DHCP; (192.168.122.2)
+
 GREEN: Bridge privatebr0:Wirtgerät vnet1; 192.168.201.1; DHCP-Server
 
+
 VM02...VMXX
+
 System: Beliebig
+
 Konfiguration:
+
 ETH0: Bridge privatebr0:Wirtgerät vnet1; DHCP
+
 Portzuweisung von IPFIRE aus.
 
 ------------------------------------------------------------
